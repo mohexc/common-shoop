@@ -19,7 +19,6 @@ const AuthContext = ({ children }) => {
     <Context.Provider value={{
       user,
       reloadAuthContext
-
     }}>
       {children}
     </Context.Provider>
