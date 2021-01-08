@@ -7,8 +7,16 @@ const AuthContext = ({ children }) => {
 
   const [token, _settoken] = useState(localStorage.getItem('token'))
   const [user, setuser] = useState()
+  const [userList, setUserList] = useState()
   const [timestamp, settimestamp] = useState(Date.now())
 
+  const getUserList = async () => {
+
+  }
+
+  const getUserList = async () => {
+
+  }
 
   const reloadAuthContext = () => {
     const currentTimestamp = Date.now()
