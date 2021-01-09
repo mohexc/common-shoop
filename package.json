@@ -5,9 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node backend/server",
-    "server": "nodemon backend/server",
-    "client": "npm start --prefix app",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "app": "npm start --prefix app",
     "dev": "concurrently \"npm run server\" \"npm run app\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",

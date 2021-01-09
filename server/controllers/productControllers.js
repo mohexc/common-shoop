@@ -68,7 +68,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   await product.remove()
   res.json({ message: 'Product removed' })
-}),
+})
 
 export {
   getProducts,

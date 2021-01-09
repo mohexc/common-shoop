@@ -6,8 +6,8 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-} from '../controllers/productControllers'
-import { protect, admin } from '../middleware/authMiddleware.js'
+} from '../controllers/productControllers.js'
+import { protect, admin } from '../middlewares/authMiddlewares.js'
 
 router.route('/').get(getProducts)
 router.route('/:id').get(getProduct)

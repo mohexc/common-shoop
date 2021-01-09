@@ -7,7 +7,7 @@ import {
   updateOrder,
   deleteOrder
 } from '../controllers/orderControllers.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+import { protect, admin } from '../middlewares/authMiddlewares.js'
 
 router.route('/').get(getOrders)
 router.route('/:id').get(getOrder)
