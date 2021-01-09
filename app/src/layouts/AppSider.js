@@ -1,6 +1,7 @@
 import React from 'react';
 import { PieChartOutlined, CodeSandboxOutlined, UserOutlined, FileOutlined, TeamOutlined } from '@ant-design/icons';
 import { Row, Layout, Menu } from 'antd';
+import { Link } from 'react-router-dom';
 
 const AppSider = ({ collapsed }) => {
 
@@ -17,17 +18,17 @@ const AppSider = ({ collapsed }) => {
 
       <Menu theme="dark" mode="inline">
         <Menu.Item key="Dashboard" icon={<PieChartOutlined />}>
-          Dashboard
-            </Menu.Item>
+          <Link to="/dashboard">Dashboard</Link>
+        </Menu.Item>
         <Menu.Item key="Users" icon={<UserOutlined />}>
-          Users
-            </Menu.Item>
+          <Link to="/userslist">Users</Link>
+        </Menu.Item>
         <Menu.Item key="Products" icon={<CodeSandboxOutlined />} >
-          Products
-          </Menu.Item>
+          <Link to="/productslist">Products</Link>
+        </Menu.Item>
         <Menu.Item key="Orders" icon={<FileOutlined />} >
-          Orders
-          </Menu.Item>
+          <Link to="/orderslist">Orders</Link>
+        </Menu.Item>
       </Menu>
     </Layout.Sider>
   );

@@ -5,7 +5,7 @@ const EditOrder = () => {
 
   return (
     <Row>
-      <Col> </Col>
+      <Col> EditOrder</Col>
     </Row>
   );
 }

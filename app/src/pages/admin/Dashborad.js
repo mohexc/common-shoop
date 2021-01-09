@@ -5,7 +5,7 @@ const Dashborad = () => {
 
   return (
     <Row>
-      <Col> </Col>
+      <Col>Dashborad </Col>
     </Row>
   );
 }

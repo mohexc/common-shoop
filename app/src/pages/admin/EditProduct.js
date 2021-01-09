@@ -5,7 +5,7 @@ const EditProduct = () => {
 
   return (
     <Row>
-      <Col> </Col>
+      <Col>EditProduct </Col>
     </Row>
   );
 }
