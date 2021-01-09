@@ -4,11 +4,28 @@ import _ from 'lodash'
 
 const Context = React.createContext()
 const AuthContext = ({ children }) => {
-
-  const [token, _settoken] = useState(localStorage.getItem('token'))
-  const [user, setuser] = useState()
+  const [products, setProducts] = useState()
   const [timestamp, settimestamp] = useState(Date.now())
 
+  const getProductList = async () => {
+
+  }
+
+  const getProduct = async (id) => {
+
+  }
+
+  const updateProduct = async (id) => {
+
+  }
+
+  const createProduct = async () => {
+
+  }
+
+  const deleteProduct = async () => {
+
+  }
 
   const reloadAuthContext = () => {
     const currentTimestamp = Date.now()
@@ -17,7 +34,12 @@ const AuthContext = ({ children }) => {
 
   return (
     <Context.Provider value={{
-      user,
+      products,
+      getProductList,
+      getProduct,
+      updateProduct,
+      createProduct,
+      deleteProduct,
       reloadAuthContext
     }}>
       {children}

@@ -26,6 +26,9 @@ const AuthContext = ({ children }) => {
   return (
     <Context.Provider value={{
       user,
+      userList,
+      getUserList,
+      getUserList,
       reloadAuthContext
     }}>
       {children}

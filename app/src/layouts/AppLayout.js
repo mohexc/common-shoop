@@ -1,23 +1,20 @@
-import React from 'react';
-import { Row, Layout } from 'antd';
-
+import React, { useState } from 'react';
+import { Layout } from 'antd';
+import AppSider from './AppSider';
+import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
+import AppContent from './AppContent';
+// main
 const AppLayout = () => {
+  const [collapsed, setcollapsed] = useState(true)
 
   return (
     <Layout>
-      <Layout.Sider></Layout.Sider>
+      <AppSider collapsed={collapsed} />
       <Layout style={{ height: "100vh" }}>
-        <Layout.Header style={{ backgroundColor: "white", boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.1)" }}>
-          Header
-        </Layout.Header>
-        <Layout.Content style={{ padding: '1rem', }}>
-          <div style={{ backgroundColor: 'white', height: '100%' }}>Content</div>
-        </Layout.Content>
-        <Layout.Footer style={{ backgroundColor: "white", boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.1)" }}>
-          <Row justify="center" align="middle" style={{ height: "100%" }}>
-            Footer
-          </Row>
-        </Layout.Footer>
+        <AppHeader collapsed={collapsed} setcollapsed={setcollapsed} />
+        <AppContent />
+        <AppFooter />
       </Layout>
     </Layout>
   );
