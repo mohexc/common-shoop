@@ -16,8 +16,16 @@ const AppHeader = ({ setcollapsed, collapsed }) => {
       <Row style={{ height: '100%' }}>
         <Col xs={12} lg={12}>
           <Row align='middle' style={{ height: "100%" }}>
-            {!collapsed && <MenuFoldOutlined onClick={() => setcollapsed(!collapsed)} style={{ fontSize: "1.5rem", }} />}
-            {collapsed && <MenuUnfoldOutlined onClick={() => setcollapsed(!collapsed)} style={{ fontSize: "1.5rem", }} />}
+            {user && user.isAdmin
+              ? (
+                <React.Fragment>
+                  {!collapsed && <MenuFoldOutlined onClick={() => setcollapsed(!collapsed)} style={{ fontSize: "1.5rem", }} />}
+                  {collapsed && <MenuUnfoldOutlined onClick={() => setcollapsed(!collapsed)} style={{ fontSize: "1.5rem", }} />}
+                </React.Fragment>
+              )
+              : null
+            }
+
             <Link to="/" className="font-blod font-size-150 " style={{ marginLeft: "2rem" }}>COMMON SHOP</Link>
           </Row>
         </Col>

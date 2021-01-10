@@ -59,8 +59,23 @@ const AuthContext = ({ children }) => {
 
   }
 
-  const createUser = async (values) => {
-
+  const register = async (values) => {
+    try {
+      const { data } = await axios.post(`/api/users/signup`, values,)
+      return {
+        complete: true,
+        data,
+        message: 'Sucess'
+      }
+    } catch (error) {
+      const result = error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+      return {
+        complete: false,
+        message: result,
+      }
+    }
   }
 
   const updateUser = async (id, values) => {
@@ -83,7 +98,7 @@ const AuthContext = ({ children }) => {
       logout,
       getUsersList,
       getUser,
-      createUser,
+      register,
       updateUser,
       deleteUser,
       reloadAuthContext

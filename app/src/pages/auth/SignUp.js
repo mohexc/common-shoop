@@ -1,7 +1,9 @@
-import React from 'react'
-import { Form, Input, Button, Row, Col, Typography } from 'antd';
+import React, { useEffect } from 'react'
+import { Form, Input, Button, Row, Col, Typography, message } from 'antd';
 import { UserOutlined, LockOutlined, SolutionOutlined, MailOutlined } from '@ant-design/icons';
 import signupImage from '../../image/signup.jpeg'
+import { useAuthContext } from '../../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,10 +15,23 @@ const tailLayout = {
 
 // main
 const SignUp = () => {
-
+  const history = useHistory()
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  const { register, user } = useAuthContext()
+
+  useEffect(() => {
+    if (user) {
+      return history.push('/')
+    }
+  }, [user])
+
+  const onFinish = async (values) => {
+    const result = await register(values)
+    if (!result.complete) {
+      return message.error(result.message)
+    }
+    message.success(result.message)
+    history.push('/signin')
   };
 
   return (
@@ -43,7 +58,7 @@ const SignUp = () => {
           </Form.Item>
           <Form.Item
             label="Username"
-            name="username"
+            name="name"
             rules={[{ required: true, message: 'Please input your Username!', },]}
           >
             <Input prefix={<UserOutlined />} placeholder="Username" />
