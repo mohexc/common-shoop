@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChartOutlined, CodeSandboxOutlined, UserOutlined, FileOutlined, TeamOutlined } from '@ant-design/icons';
+import { PieChartOutlined, CodeSandboxOutlined, UserOutlined, FileOutlined } from '@ant-design/icons';
 import { Row, Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 

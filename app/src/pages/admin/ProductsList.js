@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Table, Typography, Button } from 'antd';
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-
+import { Link, useHistory } from 'react-router-dom';
+import { useProductContext } from '../../context/ProductContext';
+import DeleteProduct from './components/DeleteProduct';
+import dayjs from 'dayjs'
 // main
 const ProductsList = () => {
-
   const history = useHistory()
-  const data = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
+  const [pageNumber, setPageNumber] = useState(1)
+  const { getProductList } = useProductContext()
+  const [products, setProducts] = useState()
+  const deleteProductModalRef = useRef()
 
-  ]
+  useEffect(() => {
+    fetchProduct()
+  }, [])
+
+  const fetchProduct = async (keyword, pageNumber) => {
+    const result = await getProductList(keyword, pageNumber)
+    if (result.complete) {
+      setProducts(result.data)
+    }
+  }
 
   const columns = [
     {
@@ -32,38 +33,46 @@ const ProductsList = () => {
     },
     {
       align: "center",
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'createdAt',
+      dataIndex: "createdAt",
+      key: 'createdAt',
+      render: (row) => dayjs(row).format('DD/MM/YYYY')
     },
     {
       align: "center",
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'updatedAt',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: (row) => dayjs(row).format('DD/MM/YYYY')
     },
     {
       width: "10%",
       align: "center",
       title: 'Operation',
-      dataIndex: 'address',
-      key: 'address',
+      key: 'Operation',
       render: (row) => {
         return (
           <Row align="center" style={{ height: "100%" }}>
             <FormOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }}
-              onClick={() => history.push('/productedit/${row')}
+              onClick={() => history.push(`/products/edit/${row._id}`)}
             />
             <DeleteOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem" }}
-
+              onClick={() => deleteProductModalRef.current.showModal(row)}
             />
           </Row>
         )
       }
     },
   ]
+
+  const handleChangeTable = (pagination, filters, sorter) => {
+    // console.log(pagination, filters, sorter)
+    // debugger
+    setPageNumber(pagination.current)
+    fetchProduct('', pagination.current)
+  }
 
   return (
     <React.Fragment>
@@ -73,19 +82,40 @@ const ProductsList = () => {
         </Col>
         <Col xs={12} >
           <Row justify="end" style={{ marginRight: "2rem" }}>
-            <Button type="primary">Create Product</Button>
+            <Link to="/products/create">
+              <Button type="primary">Create Product</Button>
+            </Link>
           </Row>
         </Col>
       </Row>
       <Row justify="center">
         <Col xs={23}>
           <Table
+            onChange={handleChangeTable}
             bordered
-            dataSource={data}
+            dataSource={products ? products.products : []}
             columns={columns}
+            scroll={{ x: 1000 }}
+            pagination={{
+              current: pageNumber,
+              total: products && products.count,
+              showSizeChanger: true,
+              pageSizeOptions: [
+                "5",
+                "10",
+                "15",
+                "20",
+                "25",
+                "30",
+                "35",
+                "49",
+                "50",
+              ],
+            }}
           />
         </Col>
       </Row>
+      <DeleteProduct ref={deleteProductModalRef} reload={fetchProduct} />
     </React.Fragment>
   );
 

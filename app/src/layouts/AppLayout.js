@@ -6,7 +6,7 @@ import AppFooter from './AppFooter';
 import AppContent from './AppContent';
 // main
 const AppLayout = () => {
-  const [collapsed, setcollapsed] = useState(true)
+  const [collapsed, setcollapsed] = useState(false)
 
   return (
     <Layout>

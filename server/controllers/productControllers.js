@@ -18,11 +18,12 @@ const getProducts = asyncHandler(async (req, res) => {
     : {}
 
   const count = await Product.countDocuments({ ...keyword })
-  const products = await Product.find({ ...keyword })
+  const products = await Product
+    .find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
-  res.json({ products, page, pages: Math.ceil(count / pageSize) })
+  res.json({ products, count })
 
 })
 
@@ -31,7 +32,7 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access  Public
 const getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id)
-  if (!prodcut) {
+  if (!product) {
     res.status(404)
     throw new Error('Product not found')
   }
@@ -42,6 +43,10 @@ const getProduct = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product(req.body)
+
+  const createdProduct = await product.save()
+  res.status(201).json(createdProduct)
 
 })
 
@@ -50,10 +55,16 @@ const createProduct = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id)
-  if (!prodcut) {
+  if (!product) {
     res.status(404)
     throw new Error('Product not found')
   }
+  const { name, } = req.body
+  product.name = name
+
+  const updatedProduct = await product.save()
+  res.json(updatedProduct)
+
 })
 
 // @desc    Delete a product

@@ -14,18 +14,20 @@ import Dashborad from '../pages/admin/Dashborad';
 import SignIn from '../pages/auth/SignIn';
 import SignUp from '../pages/auth/SignUp';
 import ForgetPassword from '../pages/auth/ForgetPassword';
+import CreateProduct from '../pages/admin/CreateProduct';
 
 const AppContent = () => {
 
   return (
     <Layout.Content style={{ padding: '1rem', }}>
-      <div style={{ backgroundColor: 'white', height: '100%' }}>
+      <div style={{ backgroundColor: 'white', height: '100%', overflowY: 'auto' }}>
         <Switch>
           <Route exact path="/dashboard"><Dashborad /></Route>
           <Route exact path="/orderslist"><OrdersList /></Route>
           <Route exact path="/orderedit/:id"><EditOrder /></Route>
           <Route exact path="/productslist"><ProductsList /></Route>
-          <Route exact path="/productedit/:id"><EditProduct /></Route>
+          <Route exact path="/products/edit/:id"><EditProduct /></Route>
+          <Route exact path="/products/create"><CreateProduct /></Route>
           <Route exact path="/userslist"><UsersList /></Route>
           <Route exact path="/updateprofile"><UpdateProfile /></Route>
           <Route exact path="/about"><About /></Route>

@@ -5,20 +5,19 @@ import _ from 'lodash'
 const Context = React.createContext()
 const CartContext = ({ children }) => {
 
-  const [token, _settoken] = useState(localStorage.getItem('token'))
-  const [user, setuser] = useState()
+  const [cart, setCart] = useState()
   const [timestamp, settimestamp] = useState(Date.now())
 
 
-  const reloadCarContext = () => {
+  const reloadCartContext = () => {
     const currentTimestamp = Date.now()
     settimestamp(currentTimestamp)
   }
 
   return (
     <Context.Provider value={{
-      user,
-      reloadCarContext
+      cart,
+      reloadCartContext
     }}>
       {children}
     </Context.Provider>

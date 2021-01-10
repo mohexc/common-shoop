@@ -5,16 +5,31 @@ import _ from 'lodash'
 const Context = React.createContext()
 const AuthContext = ({ children }) => {
 
-  const [token, _settoken] = useState(localStorage.getItem('token'))
   const [user, setuser] = useState()
   const [userList, setUserList] = useState()
   const [timestamp, settimestamp] = useState(Date.now())
 
-  const getUserList = async () => {
+  const login = async () => {
 
   }
 
-  const getUserList = async () => {
+  const getUsersList = async (keyword, pageNumber) => {
+
+  }
+
+  const getUser = async (id) => {
+
+  }
+
+  const createUser = async (values) => {
+
+  }
+
+  const updateUser = async (id, values) => {
+
+  }
+
+  const deleteUser = async (id) => {
 
   }
 
@@ -27,8 +42,11 @@ const AuthContext = ({ children }) => {
     <Context.Provider value={{
       user,
       userList,
-      getUserList,
-      getUserList,
+      getUsersList,
+      getUser,
+      createUser,
+      updateUser,
+      deleteUser,
       reloadAuthContext
     }}>
       {children}

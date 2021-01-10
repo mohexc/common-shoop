@@ -3,10 +3,9 @@ import Axios from 'axios'
 import _ from 'lodash'
 
 const Context = React.createContext()
-const ProductContext = ({ children }) => {
+const OrderContext = ({ children }) => {
 
-  const [token, _settoken] = useState(localStorage.getItem('token'))
-  const [products, setProducts] = useState()
+  const [orders, setOrders] = useState()
   const [timestamp, settimestamp] = useState(Date.now())
 
   useEffect(() => {
@@ -14,27 +13,27 @@ const ProductContext = ({ children }) => {
   }, [])
 
 
-  const reloadProductContext = () => {
+  const reloadOrderContext = () => {
     const currentTimestamp = Date.now()
     settimestamp(currentTimestamp)
   }
 
   return (
     <Context.Provider value={{
-      products,
-      reloadAuthContext
+      orders,
+      reloadOrderContext
     }}>
       {children}
     </Context.Provider>
   )
 }
 
-export const useProductContext = () => {
+export const useOrderContext = () => {
   const context = useContext(Context)
   if (!context) {
-    throw new Error('Cannot use useProductContext outside auth provider')
+    throw new Error('Cannot use useOrderContext outside auth provider')
   }
   return context
 }
 
-export default ProductContext
+export default OrderContext
