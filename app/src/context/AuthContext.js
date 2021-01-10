@@ -1,20 +1,58 @@
 import React, { useState, useContext, useEffect } from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 import _ from 'lodash'
 
 const Context = React.createContext()
 const AuthContext = ({ children }) => {
 
-  const [user, setuser] = useState()
-  const [userList, setUserList] = useState()
+  const [user, setuser] = useState(JSON.parse(localStorage.getItem('user')))
+  // eslint-disable-next-line
   const [timestamp, settimestamp] = useState(Date.now())
 
-  const login = async () => {
+  const login = async (values) => {
+    try {
+      const { data } = await axios.post(`/api/users/signin`, values)
+      localStorage.setItem('user', JSON.stringify(data))
+      setuser(data)
+      return {
+        complete: true,
+        data,
+        message: 'Sigin Sucess'
+      }
+    } catch (error) {
+      const result = error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+      return {
+        complete: false,
+        message: result,
+      }
+    }
 
   }
+  const logout = () => {
+    setuser()
+  }
 
-  const getUsersList = async (keyword, pageNumber) => {
-
+  const getUsersList = async (keyword = '', pageNumber = '') => {
+    try {
+      // const products = await authInstance(user).get(`api/products`)
+      const { data } = await axios.get(`/api/users?keyword=${keyword}&pageNumber=${pageNumber}`)
+      debugger
+      return {
+        complete: true,
+        data,
+        message: 'Sucess'
+      }
+    } catch (error) {
+      const result = error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+      return {
+        complete: false,
+        message: result,
+      }
+    }
   }
 
   const getUser = async (id) => {
@@ -41,7 +79,8 @@ const AuthContext = ({ children }) => {
   return (
     <Context.Provider value={{
       user,
-      userList,
+      login,
+      logout,
       getUsersList,
       getUser,
       createUser,

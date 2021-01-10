@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form, Input, Button, Typography, message, } from 'antd';
+import { Row, Col, Form, Input, Button, message, } from 'antd';
 import { useHistory, useParams } from 'react-router-dom';
 import { useProductContext } from '../../context/ProductContext';
 

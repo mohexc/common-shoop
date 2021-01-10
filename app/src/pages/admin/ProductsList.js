@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Row, Col, Table, Typography, Button } from 'antd';
+import { Row, Col, Table, Typography, Button, message } from 'antd';
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { useProductContext } from '../../context/ProductContext';
@@ -15,13 +15,16 @@ const ProductsList = () => {
 
   useEffect(() => {
     fetchProduct()
+    // eslint-disable-next-line
   }, [])
 
   const fetchProduct = async (keyword, pageNumber) => {
     const result = await getProductList(keyword, pageNumber)
     if (result.complete) {
       setProducts(result.data)
+      return
     }
+    message.error(result.message)
   }
 
   const columns = [

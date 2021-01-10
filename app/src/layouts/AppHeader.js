@@ -5,8 +5,11 @@ import SignInButton from './Components/SignInButton';
 import UserButton from './Components/UserButton';
 import { Link } from 'react-router-dom';
 import CartButton from './Components/CartButton';
+import { useAuthContext } from '../context/AuthContext';
 
 const AppHeader = ({ setcollapsed, collapsed }) => {
+
+  const { user } = useAuthContext()
 
   return (
     <Layout.Header style={{ backgroundColor: "white", paddingLeft: '0.5rem', boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.1)" }}>
@@ -18,16 +21,13 @@ const AppHeader = ({ setcollapsed, collapsed }) => {
             <Link to="/" className="font-blod font-size-150 " style={{ marginLeft: "2rem" }}>COMMON SHOP</Link>
           </Row>
         </Col>
-        {/* <Col xs={12} lg={12}>
-          <Row align="middle" style={{ height: '100%' }}>
-            <Input.Search enterButton />
-          </Row> 
-        </Col>*/}
         <Col xs={12} lg={12}>
           <Row justify="end" align="middle" style={{ height: '100%' }}>
             <CartButton />
-            <UserButton />
-            <SignInButton />
+            {user && <UserButton />}
+            {!user && <SignInButton />}
+
+            <Link to="/about" style={{ marginLeft: "2rem" }}><strong>About</strong></Link>
           </Row>
         </Col>
       </Row>

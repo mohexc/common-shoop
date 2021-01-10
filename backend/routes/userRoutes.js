@@ -10,8 +10,8 @@ import {
 } from '../controllers/userControllers.js'
 import { protect, admin } from '../middlewares/authMiddlewares.js'
 
-router.route('/').post(login)
-router.route('/').post(createUser)
+router.route('/signin').post(login)
+router.route('/signup').post(createUser)
 router.route('/').get(getUsers)
 router.route('/:id').get(getUser)
 router.route('/:id').put(updateUser)

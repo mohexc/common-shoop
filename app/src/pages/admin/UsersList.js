@@ -1,153 +1,95 @@
-import React from 'react';
-import { Row, Col, Table, Typography, Button } from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
+import { Row, Col, Table, Typography, Button, message } from 'antd';
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import dayjs from 'dayjs'
+import { useAuthContext } from '../../context/AuthContext';
 
 // main
 const UsersList = () => {
 
   const history = useHistory()
-  const data = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
+  const [pageNumber, setPageNumber] = useState(1)
+  const { getUsersList } = useAuthContext()
+  const [users, setUsers] = useState()
+  const deleteProductModalRef = useRef()
 
-  ]
+  useEffect(() => {
+    fetchUser()
+    // eslint-disable-next-line
+  }, [])
+
+  const fetchUser = async (keyword, pageNumber) => {
+    const result = await getUsersList(keyword, pageNumber)
+    if (result.complete) {
+      setUsers(result.data)
+      return
+    }
+    message.error(result.message)
+  }
 
   const columns = [
     {
       align: "center",
-      title: 'Name',
+      title: 'Username',
       dataIndex: 'name',
       key: 'name',
     },
     {
       align: "center",
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       align: "center",
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'createdAt',
+      dataIndex: "createdAt",
+      key: 'createdAt',
+      render: (row) => dayjs(row).format('DD/MM/YYYY')
+    },
+    {
+      align: "center",
+      title: 'updatedAt',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: (row) => dayjs(row).format('DD/MM/YYYY')
+    },
+    {
+      align: "center",
+      title: 'isAdmin',
+      dataIndex: 'isAdmin',
+      key: 'updatedAt',
+      render: (row) => JSON.stringify(row)
     },
     {
       width: "10%",
       align: "center",
       title: 'Operation',
-      dataIndex: 'address',
-      key: 'address',
+      key: 'Operation',
       render: (row) => {
         return (
           <Row align="center" style={{ height: "100%" }}>
             <FormOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }}
-              onClick={() => history.push('/useredit/${row')}
+              onClick={() => history.push(`/products/edit/${row._id}`)}
             />
             <DeleteOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem" }}
-
+              onClick={() => deleteProductModalRef.current.showModal(row)}
             />
           </Row>
         )
       }
     },
   ]
+
+  const handleChangeTable = (pagination, filters, sorter) => {
+    // console.log(pagination, filters, sorter)
+    // debugger
+    setPageNumber(pagination.current)
+    fetchUser("", pagination.current)
+  }
 
   return (
     <React.Fragment>
@@ -164,9 +106,27 @@ const UsersList = () => {
       <Row justify="center">
         <Col xs={23}>
           <Table
+            onChange={handleChangeTable}
             bordered
-            dataSource={data}
+            dataSource={users ? users.users : []}
             columns={columns}
+            scroll={{ x: 1000 }}
+            pagination={{
+              current: pageNumber,
+              total: users && users.count,
+              showSizeChanger: true,
+              pageSizeOptions: [
+                "5",
+                "10",
+                "15",
+                "20",
+                "25",
+                "30",
+                "35",
+                "49",
+                "50",
+              ],
+            }}
           />
         </Col>
       </Row>

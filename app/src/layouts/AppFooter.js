@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Layout } from 'antd';
+import { Row, Layout } from 'antd';
 
 const AppFooter = () => {
 

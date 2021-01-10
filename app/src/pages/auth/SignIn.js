@@ -1,8 +1,9 @@
-import React from 'react'
-import { Form, Input, Button, Checkbox, Row, Col, Typography } from 'antd';
-import { UserOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { Form, Input, Button, Checkbox, Row, Col, Typography, message } from 'antd';
+import { MailOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
 import singinImage from '../../image/signin.jpg'
+import { useAuthContext } from '../../context/AuthContext';
 
 const layout = {
   labelCol: { span: 8 },
@@ -14,9 +15,22 @@ const tailLayout = {
 
 // main
 const SignIn = () => {
+  const history = useHistory()
+  const { login, user } = useAuthContext()
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  useEffect(() => {
+    if (user) {
+      history.push('/')
+    }
+  }, [user])
+
+  const onFinish = async (values) => {
+    const result = await login(values)
+    if (!result.complete) {
+      return message.error(result.message)
+    }
+    message.success(result.message)
+    history.push('/')
   };
 
   return (
@@ -31,12 +45,16 @@ const SignIn = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: 'Please input your Username!', },]}
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please input your Email!', },
+              { type: 'email', message: 'The input is not valid E-mail!', },
+            ]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Username" />
+            <Input prefix={<MailOutlined />} placeholder="Email" />
           </Form.Item>
+
           <Form.Item
             label="Password"
             name="password"
@@ -56,7 +74,7 @@ const SignIn = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button block type="primary" htmlType="submit" style={{ marginBottom: "1rem" }}>Log in</Button>
+            <Button block type="primary" htmlType="submit" style={{ marginBottom: "1rem" }}>SIGNIN</Button>
             <span style={{ margin: "1rem" }}>Or</span>
             <Link to="/signup">register now!</Link>
           </Form.Item>
