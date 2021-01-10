@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox, Row, Col, Typography } from 'antd';
-import { UserOutlined, LockOutlined, SolutionOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Row, Col, Typography } from 'antd';
+import { UserOutlined, LockOutlined, SolutionOutlined, MailOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import signupImage from '../../image/signup.jpeg'
 
@@ -15,6 +15,7 @@ const tailLayout = {
 // main
 const SignUp = () => {
 
+  const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
@@ -25,11 +26,22 @@ const SignUp = () => {
         <Typography.Title level={2}>Sign Up <SolutionOutlined /> </Typography.Title>
         <Form
           {...layout}
+          form={form}
           labelAlign="left"
           name="normal_login"
           initialValues={{ remember: true, }}
           onFinish={onFinish}
         >
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please input your Email!', },
+              { type: 'email', message: 'The input is not valid E-mail!', },
+            ]}
+          >
+            <Input prefix={<MailOutlined />} placeholder="Email" />
+          </Form.Item>
           <Form.Item
             label="Username"
             name="username"
@@ -48,17 +60,31 @@ const SignUp = () => {
               placeholder="Password"
             />
           </Form.Item>
-          <Form.Item {...tailLayout}>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-            <Link to="/forgetpassword">Forgot password</Link>
+          <Form.Item
+            label="Confirm Password"
+            name="confirmPassword"
+            rules={[
+              { required: true, message: 'Please input your Confirm Password!', },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('The two passwords that you entered do not match!');
+                },
+              }),
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Confirm Password"
+            />
           </Form.Item>
 
+
           <Form.Item {...tailLayout}>
-            <Button block type="primary" htmlType="submit" >Log in</Button>
-            <span style={{ margin: "1rem" }}>Or</span>
-            <Link to="/signup">register now!</Link>
+            <Button block type="primary" htmlType="submit" >SIGN UP</Button>
           </Form.Item>
         </Form>
       </Col>
