@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, Row, Col, Typography } from 'antd';
 import { UserOutlined, LockOutlined, SolutionOutlined, MailOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import signupImage from '../../image/signup.jpeg'
 
 const layout = {

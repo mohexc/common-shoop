@@ -1,8 +1,10 @@
 import React from 'react';
-import { Row, Col, Layout, Input } from 'antd';
+import { Row, Col, Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, } from '@ant-design/icons';
-import SignInButton from './Component.js/SignInButton';
+import SignInButton from './Components/SignInButton';
+import UserButton from './Components/UserButton';
 import { Link } from 'react-router-dom';
+import CartButton from './Components/CartButton';
 
 const AppHeader = ({ setcollapsed, collapsed }) => {
 
@@ -23,6 +25,8 @@ const AppHeader = ({ setcollapsed, collapsed }) => {
         </Col>*/}
         <Col xs={12} lg={12}>
           <Row justify="end" align="middle" style={{ height: '100%' }}>
+            <CartButton />
+            <UserButton />
             <SignInButton />
           </Row>
         </Col>

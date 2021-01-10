@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 
-const UpdateProfile = () => {
+const MyOrders = () => {
 
   return (
     <Row>
-      <Col>UpdateProfile </Col>
+      <Col>MyOrders </Col>
     </Row>
   );
 }
 
-export default UpdateProfile;
+export default MyOrders;

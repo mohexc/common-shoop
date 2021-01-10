@@ -6,7 +6,7 @@ const SignInButton = () => {
   const history = useHistory()
 
   return (
-    <Button onClick={() => history.push('/signin')} type="primary">Sign In</Button>
+    <Button style={{ marginLeft: "2rem" }} onClick={() => history.push('/signin')} type="primary">Sign In</Button>
   );
 }
 
