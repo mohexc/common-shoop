@@ -6,7 +6,7 @@ import UserButton from './Components/UserButton';
 import { Link } from 'react-router-dom';
 import CartButton from './Components/CartButton';
 import { useAuthContext } from '../context/AuthContext';
-
+// main
 const AppHeader = ({ setcollapsed, collapsed }) => {
 
   const { user } = useAuthContext()
@@ -34,7 +34,6 @@ const AppHeader = ({ setcollapsed, collapsed }) => {
             <CartButton />
             {user && <UserButton />}
             {!user && <SignInButton />}
-
             <Link to="/about" style={{ marginLeft: "2rem" }}><strong>About</strong></Link>
           </Row>
         </Col>

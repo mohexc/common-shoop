@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 
-const EditUser = () => {
+const PrintOrder = () => {
 
   return (
     <Row>
-      <Col>EditUser </Col>
+      <Col> </Col>
     </Row>
   );
 }
 
-export default EditUser;
+export default PrintOrder;

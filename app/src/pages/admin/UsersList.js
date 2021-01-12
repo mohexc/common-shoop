@@ -72,11 +72,11 @@ const UsersList = () => {
           <Row align="center" style={{ height: "100%" }}>
             <FormOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }}
-              onClick={() => history.push(`/products/edit/${row._id}`)}
+              onClick={() => history.push(`/user/edit/${row._id}`)}
             />
             <DeleteOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem" }}
-              onClick={() => deleteProductModalRef.current.showModal(row)}
+            // onClick={() => deleteProductModalRef.current.showModal(row)}
             />
           </Row>
         )

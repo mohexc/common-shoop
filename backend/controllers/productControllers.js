@@ -59,9 +59,14 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Product not found')
   }
-  const { name, } = req.body
-  product.name = name
 
+  product.name = req.body.name
+  product.price = req.body.price
+  product.description = req.body.description
+
+  product.brand = req.body.brand
+  product.category = req.body.category
+  product.countInStock = req.body.countInStock
   const updatedProduct = await product.save()
   res.json(updatedProduct)
 

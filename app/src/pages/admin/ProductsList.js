@@ -29,28 +29,60 @@ const ProductsList = () => {
 
   const columns = [
     {
-      align: "center",
+      // align: "center",
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      align: "center",
+      // align: "center",
+      title: 'brand',
+      dataIndex: 'brand',
+      key: 'brand',
+    },
+    {
+      // align: "center",
+      title: 'category',
+      dataIndex: 'category',
+      key: 'category',
+    },
+    {
+      // align: "center",
+      title: 'price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      // align: "center",
+      title: 'countInStock',
+      dataIndex: 'countInStock',
+      key: 'countInStock',
+    },
+    {
+      // align: "center",
       title: 'createdAt',
       dataIndex: "createdAt",
       key: 'createdAt',
       render: (row) => dayjs(row).format('DD/MM/YYYY')
     },
     {
-      align: "center",
+      // align: "center",
       title: 'updatedAt',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       render: (row) => dayjs(row).format('DD/MM/YYYY')
     },
     {
+      // align: "center",
+      title: 'updatedAt',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: (row) => dayjs(row).format('DD/MM/YYYY')
+    },
+
+    {
       width: "10%",
-      align: "center",
+      // align: "center",
       title: 'Operation',
       key: 'Operation',
       render: (row) => {

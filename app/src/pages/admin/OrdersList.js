@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col, Table, Typography, Button } from 'antd';
-import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Row, Col, Table, Typography, Button, Input, Select } from 'antd';
+import { FormOutlined, DeleteOutlined, PrinterOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
 // main
@@ -42,23 +42,22 @@ const OrdersList = () => {
       dataIndex: 'address',
       key: 'address',
     },
+
     {
-      width: "10%",
-      align: "center",
+      width: "15%",
+      // align: "center",
       title: 'Operation',
       dataIndex: 'address',
       key: 'address',
       render: (row) => {
         return (
           <Row align="center" style={{ height: "100%" }}>
+            <PrinterOutlined style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }} />
             <FormOutlined
               style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }}
               onClick={() => history.push('/orderedit/${row')}
             />
-            <DeleteOutlined
-              style={{ marginRight: "1rem", fontSize: "1.2rem" }}
-
-            />
+            <DeleteOutlined style={{ marginRight: "1rem", fontSize: "1.2rem", cursor: "pointer" }} />
           </Row>
         )
       }
@@ -70,10 +69,19 @@ const OrdersList = () => {
       <Row align="middle" style={{ height: "5rem " }}>
         <Col xs={12} style={{ padding: '1rem' }}>
           <Typography.Title level={4}>OrdersList</Typography.Title>
+
         </Col>
         <Col xs={12} >
-          <Row justify="end" style={{ marginRight: "2rem" }}>
-            <Button type="primary">Create Product</Button>
+          <Row justify='space-between' >
+            <Col xs={16}>
+              <Input.Search enterButton />
+            </Col>
+            <Col xs={8} className="flex-row-end">
+              <Row justify='end' style={{ marginRight: "2rem" }}>
+                <Button type="primary">Create Product</Button>
+
+              </Row>
+            </Col>
           </Row>
         </Col>
       </Row>
