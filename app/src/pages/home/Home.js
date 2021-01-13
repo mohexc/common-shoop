@@ -5,7 +5,47 @@ const Home = () => {
 
   return (
     <Row>
-      <Col>Home </Col>
+      <Col>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+      </Col>
     </Row>
   );
 }

@@ -60,21 +60,9 @@ const CreateProduct = () => {
           'Content-Type': "multipart/form-data"
         }
       }
-
       images.fileList.forEach(file => formData.append('imgCollection', file.originFileObj))
-
       const { data } = await axios.post('/api/upload', formData, config)
-      debugger
-      // const result = await Promise.all(images.fileList.map(async (file) => {
-      //   formData.append('imgCollection', file.originFileObj)
-      //   debugger
-      //   const { data } = await axios.post('/api/upload', formData, config)
-      //   return data
-      // }))
       message.success(data)
-      console.log(data)
-      debugger
-
     } catch (error) {
       const result = error.response && error.response.data.message
         ? error.response.data.message
